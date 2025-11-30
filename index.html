@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ねるのごほうびスクラッチ</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-background-pattern"></div>
+    <div class="page-wrapper">
+      <header class="main-header">
+        <h1 class="site-title">ねるのごほうびスクラッチ</h1>
+        <p class="site-subtitle">がんばったあなたへ、ひみつのごほうびカード</p>
+      </header>
+
+      <main>
+        <!-- INTRO SECTION -->
+        <section id="intro-section" class="card">
+          <div class="main-image-wrapper">
+            <img
+              src="IMG_9334.PNG"
+              alt="ねるのごほうびスクラッチ メイン画像"
+              class="main-image"
+            />
+          </div>
+
+          <div class="description">
+            <p>
+              ねるの「ごほうびスクラッチ」です💗
+            </p>
+            <p>
+              ボタンを押して、ひみつの暗証番号を入力すると、<br />
+              スクラッチが現れて、それを削ると<br />
+              ねるからのごほうびが入ったスクラッチカードが出現します！！！
+            </p>
+            <p>
+              ワクワクしながら削ってね♡
+            </p>
+          </div>
+
+          <div class="button-area">
+            <button id="start-scratch-btn" class="primary-button">
+              さっそくスクラッチをけずる
+            </button>
+            <p id="already-used-message" class="status-message" hidden>
+              このスクラッチはすでにあそびおわりました。
+            </p>
+          </div>
+        </section>
+
+        <!-- SCRATCH SECTION (after auth) -->
+        <section id="scratch-section" class="card scratch-section" hidden>
+          <h2 class="section-title">ごほうびスクラッチ</h2>
+          <p class="section-text">
+            ピンクのスクラッチカードのうえをタップして、<br />
+            中身をゆっくり削ってみてください。
+          </p>
+
+          <div id="scratch-card-area" class="scratch-card-area">
+            <div class="scratch-card">
+              <img
+                src="phonto 62.JPG"
+                alt="スクラッチの当たり画像"
+                class="scratch-image"
+              />
+              <div id="scratch-overlay" class="scratch-overlay">
+                <canvas id="scratch-canvas"></canvas>
+                <img
+                  id="scratch-coin"
+                  src="image.png"
+                  alt="コインでスクラッチしているイラスト"
+                  class="scratch-coin"
+                />
+                <div class="scratch-overlay-inner scratch-message">
+                  <p class="overlay-title">ごほうびスクラッチ</p>
+                  <p class="overlay-text">指でこすると、ねるのごほうびが見えるよ♡</p>
+                </div>
+              </div>
+            </div>
+            <p id="after-scratch-message" class="status-message" hidden>
+              ごほうびがあらわれました。おつかれさまでした。
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="page-footer">
+        <p class="footer-text">ねるのごほうびスクラッチ</p>
+      </footer>
+    </div>
+
+    <!-- CONFIRM MODAL -->
+    <div id="confirm-modal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <p class="modal-title">スクラッチを削りますか？</p>
+        <p class="modal-text">
+          ひみつの暗証番号を入れると、ごほうびスクラッチを削れます。
+        </p>
+        <div class="modal-buttons">
+          <button id="confirm-yes-btn" class="primary-button small">
+            やる
+          </button>
+          <button id="confirm-later-btn" class="secondary-button small">
+            あとにする
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASSWORD MODAL -->
+    <div id="password-modal" class="modal" aria-hidden="true">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content">
+        <p class="modal-title">暗証番号を入力してください</p>
+        <p class="modal-text">4桁のパスコードを入れるとスクラッチ画面に進めます。</p>
+        <form id="password-form" class="password-form">
+          <input
+            id="pin-input"
+            class="pin-input"
+            type="password"
+            inputmode="numeric"
+            autocomplete="off"
+            maxlength="4"
+            placeholder="・・・・"
+          />
+          <p id="pin-error" class="error-message" aria-live="polite"></p>
+          <div class="modal-buttons">
+            <button type="submit" class="primary-button small">OK</button>
+            <button
+              type="button"
+              id="password-cancel-btn"
+              class="secondary-button small"
+            >
+              キャンセル
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+  </html>
+
+

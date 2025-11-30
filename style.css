@@ -1,0 +1,427 @@
+/* ===============================
+   ベース設定
+================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans",
+    "Yu Gothic", "Meiryo", sans-serif;
+  background: #ffeef5;
+  color: #5c3b4a;
+  min-height: 100vh;
+}
+
+.page-background-pattern {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(
+      circle at 10% 20%,
+      rgba(255, 255, 255, 0.7) 0,
+      transparent 55%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 255, 255, 0.8) 0,
+      transparent 60%
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 210, 230, 0.6) 0,
+      transparent 55%
+    );
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.page-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+/* ===============================
+   ヘッダー
+================================ */
+.main-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.site-title {
+  margin: 0 0 6px;
+  font-size: 1.8rem;
+  letter-spacing: 0.08em;
+  color: #e46898;
+}
+
+.site-subtitle {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #9b6277;
+}
+
+/* ===============================
+   カード共通
+================================ */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 24px;
+  padding: 18px 18px 20px;
+  box-shadow: 0 12px 25px rgba(221, 123, 159, 0.18);
+  backdrop-filter: blur(6px);
+}
+
+.card + .card {
+  margin-top: 20px;
+}
+
+.main-image-wrapper {
+  margin-bottom: 14px;
+}
+
+.main-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  background-color: #fbe2ee; /* 画像の上下に余白が出てもなじむように */
+  border-radius: 18px;
+  box-shadow: 0 6px 16px rgba(125, 87, 90, 0.35);
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  text-align: center;
+  color: #5c3b4a;
+  margin-bottom: 12px;
+}
+
+.description p {
+  margin: 6px 0;
+}
+
+.button-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ===============================
+   ボタン
+================================ */
+.primary-button,
+.secondary-button {
+  border-radius: 999px;
+  padding: 12px 24px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  font-size: 0.95rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.12s ease;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, #ff8fb3, #ffb6cf);
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(206, 90, 135, 0.45);
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(206, 90, 135, 0.55);
+}
+
+.primary-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(206, 90, 135, 0.4);
+}
+
+.secondary-button {
+  background: #ffe4ef;
+  color: #c36b8d;
+  box-shadow: 0 4px 10px rgba(173, 96, 128, 0.2);
+}
+
+.secondary-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 12px rgba(173, 96, 128, 0.3);
+}
+
+.secondary-button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(173, 96, 128, 0.22);
+}
+
+.primary-button.small,
+.secondary-button.small {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+}
+
+.primary-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+  box-shadow: none;
+}
+
+/* ===============================
+   スクラッチセクション
+================================ */
+.scratch-section {
+  margin-top: 20px;
+}
+
+.section-title {
+  margin: 0 0 4px;
+  font-size: 1.3rem;
+  text-align: center;
+  color: #e46898;
+}
+
+.section-text {
+  margin: 0;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #6d4355;
+  line-height: 1.7;
+}
+
+.scratch-card-area {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.scratch-card {
+  position: relative;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 22px rgba(104, 73, 88, 0.4);
+}
+
+.scratch-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scratch-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: #ffd6ec;
+  background-image: repeating-linear-gradient(
+    135deg,
+    #ffeaf6 0,
+    #ffeaf6 8px,
+    #ffd2e6 8px,
+    #ffd2e6 16px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.scratch-overlay-inner {
+  text-align: center;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 18px;
+  border: 2px dashed #f08fb0;
+}
+
+.overlay-title {
+  margin: 0 0 4px;
+  font-weight: 700;
+  color: #e46898;
+}
+
+.overlay-text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #7a4a61;
+}
+
+.scratch-overlay.scratched {
+  opacity: 0;
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
+#scratch-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  touch-action: none; /* スクロールよりもこする操作を優先 */
+}
+
+.scratch-coin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 90px;
+  height: auto;
+  pointer-events: none;
+  opacity: 0; /* 最初は非表示。こすり始めたタイミングでJSから1にする */
+  transform: translate(-9999px, -9999px);
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.18));
+  transition: opacity 0.15s ease;
+  z-index: 5;
+}
+
+.scratch-message {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none; /* テキストの上でも指の動きを拾う */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.scratch-overlay.scratching-started .scratch-message {
+  opacity: 0;
+  transform: translateY(8px) scale(0.98);
+}
+
+.status-message {
+  font-size: 0.8rem;
+  color: #8a5c73;
+  text-align: center;
+}
+
+.error-message {
+  min-height: 1.2em;
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: #e53963;
+  text-align: center;
+}
+
+/* ===============================
+   モーダル
+================================ */
+.modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal.is-visible {
+  display: flex;
+}
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(85, 45, 64, 0.35);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  width: min(90%, 360px);
+  background: #fff9fc;
+  border-radius: 22px;
+  padding: 18px 18px 16px;
+  box-shadow: 0 16px 30px rgba(88, 50, 69, 0.6);
+  text-align: center;
+}
+
+.modal-title {
+  margin: 0 0 6px;
+  font-weight: 700;
+  color: #e46898;
+}
+
+.modal-text {
+  margin: 0 0 10px;
+  font-size: 0.9rem;
+  color: #6f4457;
+  line-height: 1.6;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.password-form {
+  margin-top: 6px;
+}
+
+.pin-input {
+  width: 140px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 2px solid #f5a8c6;
+  text-align: center;
+  letter-spacing: 0.4em;
+  font-size: 1.1rem;
+  background: #fff;
+  color: #4d3142;
+}
+
+.pin-input::placeholder {
+  color: #d9a9bc;
+}
+
+/* ===============================
+   フッター
+================================ */
+.page-footer {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 0.75rem;
+  color: #a87992;
+}
+
+.footer-text {
+  margin: 0;
+}
+
+/* ===============================
+   レスポンシブ調整
+================================ */
+@media (min-width: 768px) {
+  .page-wrapper {
+    padding-top: 32px;
+  }
+
+  .site-title {
+    font-size: 2rem;
+  }
+
+  .card {
+    padding: 22px 24px 24px;
+  }
+}
+
+
