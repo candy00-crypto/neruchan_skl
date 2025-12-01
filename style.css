@@ -241,6 +241,7 @@ body {
   cursor: pointer;
   overflow: hidden;
   transition: opacity 0.5s ease, transform 0.5s ease;
+  touch-action: none; /* スマホでスクロールよりもスクラッチ操作を優先 */
 }
 
 .scratch-overlay-inner {

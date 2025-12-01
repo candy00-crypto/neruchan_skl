@@ -175,6 +175,8 @@ function checkRevealProgress() {
 function setupScratchEvents() {
   if (!scratchCanvas) return;
 
+  const targets = [scratchCanvas, scratchOverlay].filter(Boolean);
+
   const startScratch = (event) => {
     isScratching = true;
     if (!hasStartedScratch) {
@@ -207,12 +209,12 @@ function setupScratchEvents() {
   };
 
   // PC（マウス）
-  scratchCanvas.addEventListener("mousedown", startScratch);
+  targets.forEach((el) => el.addEventListener("mousedown", startScratch));
   window.addEventListener("mousemove", moveScratch);
   window.addEventListener("mouseup", endScratch);
 
   // スマホ・タブレット（タッチ）
-  scratchCanvas.addEventListener("touchstart", startScratch, { passive: false });
+  targets.forEach((el) => el.addEventListener("touchstart", startScratch, { passive: false }));
   window.addEventListener("touchmove", moveScratch, { passive: false });
   window.addEventListener("touchend", endScratch);
   window.addEventListener("touchcancel", endScratch);
