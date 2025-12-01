@@ -1,5 +1,13 @@
-// 設定：4桁の暗証番号（必要に応じて書きかえてください）
-const SECRET_PIN = "1111";
+// 設定：4桁の暗証番号ごとのごほうび画像
+const PIN_REWARDS = {
+  "1111": "IMG_9411.jpg",
+  "2323": "IMG_9412 2.jpg",
+  "4545": "IMG_9413.jpg",
+  "1919": "IMG_9414 2.jpg",
+  "2929": "IMG_9415.jpg",
+  "2233": "IMG_9416.jpg",
+  "7777": "IMG_9417.jpg",
+};
 const STORAGE_KEY_USED = "neru_reward_scratch_used";
 
 const startScratchBtn = document.getElementById("start-scratch-btn");
@@ -23,6 +31,7 @@ const scratchOverlay = document.getElementById("scratch-overlay");
 const scratchCanvas = document.getElementById("scratch-canvas");
 const scratchCoin = document.getElementById("scratch-coin");
 const afterScratchMessage = document.getElementById("after-scratch-message");
+const rewardImage = document.getElementById("reward-image");
 
 // -------------------------------
 // ユーティリティ
@@ -256,7 +265,13 @@ passwordForm.addEventListener("submit", (event) => {
     return;
   }
 
-  if (value === SECRET_PIN) {
+  const rewardSrc = PIN_REWARDS[value];
+
+  if (rewardSrc) {
+    // 対応するごほうび画像に差し替え
+    if (rewardImage) {
+      rewardImage.src = rewardSrc;
+    }
     pinError.textContent = "";
     closeModal(passwordModal);
     // スクラッチ画面を表示
