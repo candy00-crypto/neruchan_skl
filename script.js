@@ -7,6 +7,7 @@ const PIN_REWARDS = {
   "2929": "IMG_9415.jpg",
   "2233": "IMG_9416.jpg",
   "7777": "IMG_9417.jpg",
+  "1788": "IMG_9420 2.jpg",
 };
 const STORAGE_KEY_USED = "neru_reward_scratch_used";
 
