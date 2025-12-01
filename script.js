@@ -110,7 +110,12 @@ function resizeScratchCanvas() {
 
 function getScratchPos(event) {
   const rect = scratchCanvas.getBoundingClientRect();
-  const point = event.touches ? event.touches[0] : event;
+  const point =
+    event.touches && event.touches[0]
+      ? event.touches[0]
+      : event.changedTouches && event.changedTouches[0]
+      ? event.changedTouches[0]
+      : event;
   return {
     x: point.clientX - rect.left,
     y: point.clientY - rect.top,
@@ -170,7 +175,7 @@ function checkRevealProgress() {
 function setupScratchEvents() {
   if (!scratchCanvas) return;
 
-  scratchCanvas.addEventListener("pointerdown", (event) => {
+  const startScratch = (event) => {
     isScratching = true;
     if (!hasStartedScratch) {
       hasStartedScratch = true;
@@ -179,28 +184,38 @@ function setupScratchEvents() {
     if (scratchCoin) {
       scratchCoin.style.opacity = "1";
     }
-    scratchCanvas.setPointerCapture(event.pointerId);
     scratchAt(event);
-  });
+  };
 
-  scratchCanvas.addEventListener("pointermove", (event) => {
+  const moveScratch = (event) => {
     if (!isScratching) return;
-    event.preventDefault();
+    // スクロールを止めて、スムーズにこすれるようにする
+    if (event.cancelable) {
+      event.preventDefault();
+    }
     scratchAt(event);
     checkRevealProgress();
-  });
+  };
 
-  window.addEventListener("pointerup", (event) => {
+  const endScratch = (event) => {
     if (!isScratching) return;
     isScratching = false;
-    if (event.pointerId != null && scratchCanvas.hasPointerCapture(event.pointerId)) {
-      scratchCanvas.releasePointerCapture(event.pointerId);
-    }
     if (scratchCoin) {
       scratchCoin.style.opacity = "0";
     }
     checkRevealProgress();
-  });
+  };
+
+  // PC（マウス）
+  scratchCanvas.addEventListener("mousedown", startScratch);
+  window.addEventListener("mousemove", moveScratch);
+  window.addEventListener("mouseup", endScratch);
+
+  // スマホ・タブレット（タッチ）
+  scratchCanvas.addEventListener("touchstart", startScratch, { passive: false });
+  window.addEventListener("touchmove", moveScratch, { passive: false });
+  window.addEventListener("touchend", endScratch);
+  window.addEventListener("touchcancel", endScratch);
 }
 
 function initScratch() {
